@@ -118,13 +118,51 @@ plt.title('Survived vs Sex')
 plt.show()
 
 
+# Multivariate analysis.
+# Pairplot: we are working with three feature, + survived or no
+# it would take so much time if you have like 100 columns so choose
+# the columns that you want.
+
+pairplot_cols = num_cols + ['Survived_label']
+df_pair = df[pairplot_cols].dropna()
+sns.pairplot(df_pair, hue='Survived_label')
+plt.show()
+# the diagonal plots are not really important. we have 45 degree.
+# that is why Pairplot do not show the scatterplot but show us.
+#
+# like this:
+x = np.linspace(1,100,10)
+plt.scatter(x,x)
+
+
+# age vs fare with survival & sex
+plt.figure(figsize=(10,7))
+sns.scatterplot(
+    data=df,
+    x='Age',
+    y='Fare',
+    hue='Survived_label',
+    style='Sex',
+    alpha=0.7
+  )
+plt.title = 'age vs fare by survive and sex'
+plt.show()
+
+
+# Correlation Heatmap
+plt.figure(figsize=(10,7))
+sns.heatmap(df_num.corr(), annot=True , cmap='coolwarm') 
+plt.show()
+# we would drop the column with high correlation
+
+# Cluster map
+sns.clustermap(df_num.corr(), annot=True, cmap='coolwarm', figsize=(10,7))
+# it will join the clusters.
 
 
 
-
-
-
-
-
+# interaction and sub-groups patterns
+plt.figure(figsize=(10,7))
+sns.scatterplot(x = df['Age'] , y=df['Fare'], hue=df['Survived_label'])
 
 
