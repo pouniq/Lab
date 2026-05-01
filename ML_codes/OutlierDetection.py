@@ -39,7 +39,7 @@ iqr_bounds(df['Age'])
 
 for col in num_cols:
     col_clean = df_num[col].dropna()
-    upper , lower , iqr = iqr_bounds(col_clean)
+    lower, upper , iqr = iqr_bounds(col_clean)
     outlier_mask = (col_clean > upper) | (col_clean < lower)
     num_outlier = outlier_mask.sum()
     total = col_clean.shape[0]
