@@ -37,3 +37,74 @@ library(MASS)
 cement$y
 
 ?plot
+
+
+
+# making sequences 
+
+x <- seq(1,5,0.2)
+y <- x*sin(x)
+
+plot(x,y,type='l')
+# adding layers to your plot
+
+plot(Volume~Girth , data=trees,xlim=c(0,30),ylim=c(-40,40))
+# points(c(12,16,19,20) , c(40,20,70,75), pch='$', col='red')
+# lines(c(12,16,19,20) , c(40,20,70,75), col='blue')
+# y = -30 + 5x
+abline(c(-30,5), lty=2, col='purple')
+
+
+# giving points, characters
+
+plot(Volume~Girth , data=trees)
+text(c(12,16,19), c(40,20,70),c('A','B','C'))
+?text
+
+# using mouse to select the points
+# Interesting Trick
+plot(Volume~Girth , data=trees)
+text(locator(3),c('A','B','C'))
+
+
+
+# Histograms
+# distribution of variables
+?hist
+
+hist(trees$Height , breaks = 'sturges') # default value for breaks
+length(trees$Height)
+
+
+hist(trees$Height , breaks = seq(60,90,10)) # custom breaks
+length(trees$Height)
+
+
+# with probability set to True we get relative freq
+hist(trees$Height , main = 'sturges', col='yellow', border='purple',
+     probability = T, label=T, density = 5)
+
+# when we plot=F then we get the detail
+hist(trees$Height , plot=F)
+
+
+# Q-QQ plot
+  # Normality: we compare the theory and experimented values to find that
+  # if the values are normal or not
+
+qqnorm(trees$Height)
+qqline(trees$Height)
+
+  # when doing hypothesis testing we are assuming that our values 
+  # are normal then we proceed to do testing, if we don't have 
+  # normal then we go and do non-parametric things.
+
+
+
+
+
+
+
+
+
+
