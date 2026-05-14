@@ -5,10 +5,6 @@
 # - Your code should run directly by executing this file.
 # - Keep the program structure unchanged.
 import numpy as np
-from numpy.linalg import matrix_power
-import pandas as pd
-import matplotlib.pyplot as plt
-
 
 STATES = ["Sunny", "Cloudy", "Rainy"]
 
@@ -97,7 +93,7 @@ def predict_n_steps(initial_distribution, transition_matrix, n):
 
     # TODO 3:
     # Compute T^n using numpy
-    transition_power = matrix_power(transition_matrix, n)
+    transition_power = np.linalg.matrix_power(transition_matrix, n)
     
 
     # TODO 4:
