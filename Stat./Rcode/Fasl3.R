@@ -100,6 +100,33 @@ qqline(trees$Height)
   # normal then we go and do non-parametric things.
 
 
+# one of the regression assumptions is that we have normally distributed 
+# errors
+
+
+# categorical vs. numerical 
+# boxplot ro bbin
+InsectSprays
+
+
+# pie chart
+# barplot
+# boxplot
+# vionelplot
+
+
+# to use piechart we need to turn our data to frequency table
+tis <- table(InsectSprays$spray)
+pie(tis)
+
+
+names <- c('Rasht', 'Anzali', 'Lahijan', 'Talesh')
+pop <- c(1000, 400, 150, 200)
+
+pie(pop,labels = names)
+
+barplot(pop, names = names, col = 'blue', density = 20)
+
 
 
 
