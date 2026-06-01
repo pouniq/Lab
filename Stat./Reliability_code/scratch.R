@@ -36,6 +36,7 @@ head(df[,c('ttr','relapse')])
 
 Surv2(df$ttr, df$relapse)
 
+df$ageGroup4
 
 
 

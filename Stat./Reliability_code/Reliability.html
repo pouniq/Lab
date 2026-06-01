@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="امیرمحمد عبداله پور">
 
-<title>گزارش</title>
+<title>گزارش پروژه قابلیت اعتماد</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -84,13 +85,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">گزارش</h1>
+<h1 class="title">گزارش پروژه قابلیت اعتماد</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>امیرمحمد عبداله پور </p>
+          </div>
+  </div>
     
   
     
@@ -105,23 +112,125 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="بررسی-زمان-بازگشت-به-سیگار">بررسی زمان بازگشت به سیگار</h2>
 <section id="تحلیل-کاپلان-میلر" class="level3">
 <h3 class="anchored" data-anchor-id="تحلیل-کاپلان-میلر">تحلیل کاپلان-میلر</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(asaur)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ggplot2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ggpubr</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'survminer'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:survival':
+
+    myeloma</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <p>اول از همه کتابخانه های موردنیاز را نصب میکنیم.</p>
 <ol type="1">
 <li>اولین کتابخانه ای است که داده ها را از آن گرفتم</li>
 <li>کتابخانه ای برای قابلیت اعتماد در R</li>
-<li>کتابخانه ای دیگر مربوط به قابلیت اعتماد به دلیل اینکه از ggplot تبعیت می کنید نمودار ها بهتری را رسم میکند</li>
+<li>کتابخانه ای دیگر مربوط به قابلیت اعتماد به دلیل اینکه از ggplot تبعیت می کنید نمودار های بهتری را رسم میکند</li>
 <li>کتابخانه tidyr برای عملیات هایی که روی داده انجام میشه</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(asaur)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> pharmacoSmoking</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   id ttr relapse         grp age gender     race employment yearsSmoking
+1  21 182       0   patchOnly  36   Male    white         ft           26
+2 113  14       1   patchOnly  41   Male    white      other           27
+3  39   5       1 combination  25 Female    white      other           12
+4  80  16       1 combination  54   Male    white         ft           39
+5  87   0       1 combination  45   Male    white      other           30
+6  29 182       0 combination  43   Male hispanic         ft           30
+  levelSmoking ageGroup2 ageGroup4 priorAttempts longestNoSmoke
+1        heavy     21-49     35-49             0              0
+2        heavy     21-49     35-49             3             90
+3        heavy     21-49     21-34             3             21
+4        heavy       50+     50-64             0              0
+5        heavy     21-49     35-49             0              0
+6        heavy     21-49     35-49             2           1825</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df) <span class="co"># ستون های دیتافریم</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "id"             "ttr"            "relapse"        "grp"           
+ [5] "age"            "gender"         "race"           "employment"    
+ [9] "yearsSmoking"   "levelSmoking"   "ageGroup2"      "ageGroup4"     
+[13] "priorAttempts"  "longestNoSmoke"</code></pre>
+</div>
+</div>
 </section>
+</section>
+<section id="بررسی-ستون-های-دیتافریم" class="level2">
+<h2 class="anchored" data-anchor-id="بررسی-ستون-های-دیتافریم">بررسی ستون های دیتافریم</h2>
+<p>بعد دیتا را وارد می کنیم. این دیتا راجب بازگشت افراد سیگاری در حال ترک به سیگار است که به صورت رندوم از دو روش ترک استفاده شده است که در <strong>ستون</strong> <strong>grp</strong> نمایش داده می شود.</p>
+<p><strong>ستون ttr :</strong> نشان دهنده زمان هر فرد در این آزمایش است به صورت هفتگی محاسبه شده است</p>
+<p><strong>ستون relapse :</strong> نشان دهنده این است که فرد آیا به سیگار بازگشته است یا سانسور شده است که ۱ نشان دهنده بازگشت به سیگار (failure) است و ۰ نشان دهنده دیتای سانسور شده از راست است.</p>
+<p>ستون age: سن هر فرد</p>
+<p>ستون gender: جنسیت هر فرد</p>
+<p>ستون race: نژاد هر فرد</p>
+<p>ستون employment: وضعیت اشتغال هر فرد</p>
+<p>ستون yearsSmoking: سالهای مصرف سیگار هر فرد</p>
+<p>ستون levelSmoking: میزان مصرف سیگار هر فرد که در دو وضعیت heavy و light هست اشخاصی که مصرف زیادی دارند و اشخاصی که مصرف کمی و سبکی دارند.</p>
+<p>ستون ageGroup2: ستونی است که سن اشخاص را به دو گروه تقسیم کرده است یک گروه بالای ۵۰ سال و گروه دوم ۲۱ تا ۴۹ را بررسی میکند</p>
+<p>ستون ageGroup4: سن اشخاص را به ۴ قسمت تقسیم می کند ۲۱ تا ۳۴ سال، ۳۵ تا ۴۹ سال، ۵۰ تا ۶۴ سال و ۶۵ سال به بالا.</p>
+<p>ستون priorAttempts: نشان دهنده این است که هر شخص چند بار تلاش برای ترک کرده است</p>
+<p>ستون longestNoSmoke: بیشترین میزانی که هر فرد بدون مصرف سیگار گذرانده است به صورت هفتگی</p>
+</section>
+<section id="بررسی-توزیع-هر-ستون" class="level2">
+<h2 class="anchored" data-anchor-id="بررسی-توزیع-هر-ستون">بررسی توزیع هر ستون:</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>ttr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Reliability_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">subset</span>(df<span class="sc">$</span>ttr, df<span class="sc">$</span>relapse <span class="sc">==</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Reliability_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">subset</span>(df<span class="sc">$</span>ttr, df<span class="sc">$</span>relapse <span class="sc">==</span> <span class="dv">0</span> ) , <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">200</span>) )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Reliability_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="مدل-اول-کاپلان--میلر" class="level2">
+<h2 class="anchored" data-anchor-id="مدل-اول-کاپلان--میلر">مدل اول کاپلان -میلر:</h2>
+<p>این مدل بدون در نظر گرفتن بقیه متغیرها انجام شده که یک مدل baseline خوبی برای شروع باشه.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>km_1 <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(ttr, relapse) <span class="sc">~</span> <span class="dv">1</span> ,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> df,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">type =</span> <span class="st">'kaplan-meier'</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(km_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: survfit(formula = Surv(ttr, relapse) ~ 1, data = df, type = "kaplan-meier")
+
+       n events median 0.95LCL 0.95UCL
+[1,] 125     89     49      25      75</code></pre>
+</div>
+</div>
 </section>
 
 </main>
