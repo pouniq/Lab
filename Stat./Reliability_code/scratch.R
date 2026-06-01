@@ -3,9 +3,18 @@
 # Life Table
 # cox proportional Hazards model (SemiParametric)
 # statistical assumptions:
-  # 
 # Censoring: Right Censoring
 library(asaur)
+library(survival)
+library(survminer)
+library(tidyr)
+
+# MLOPS
+library(pins)
+library(vetiver)
+library(plumber)
+
+
 
 # یک دیتای که راجب بازگشتن به مصرف سیگار است بعد از مدتی دوری از آن
 df <- pharmacoSmoking
@@ -32,7 +41,6 @@ Surv2(df$ttr, df$relapse)
 
 
 # Kaplan-Meier Analysis
-library(survival)
 km_1 <- survfit(Surv(ttr, relapse) ~ 1 ,
                 data = df,
                 type = 'kaplan-meier')
@@ -61,7 +69,6 @@ plot(km_1)
 
 # install something visually better plot
 # install.packages('survminer')
-library(survminer)
 ggsurvplot(km_1,
            data=df,
            risk.table = TRUE,
@@ -144,7 +151,7 @@ head(df)
 
 
 
-cox_reg3 <- coxph(Surv(ttr, relapse) ~ age + grp ,
+cox_reg3 <- coxph(Surv(ttr, relapse) ~ age + grp + employment,
                   data = df)
 summary(cox_reg3)
 
@@ -157,13 +164,12 @@ summary(cox_reg3)
 
 # nested comparison
 # we do ANOVA to compare these models
-library(tidyr)
 
 
 cox_reg2 <- coxph(Surv(ttr, relapse) ~ ageGroup4 + yearsSmoking + grp,
                   data = df)
 
-cox_reg3 <- coxph(Surv(ttr, relapse) ~ age + grp ,
+cox_reg3 <- coxph(Surv(ttr, relapse) ~ age + grp + employment,
                   data = df)
 
  
