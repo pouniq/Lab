@@ -87,3 +87,41 @@ f <- function(x,y=6){
 
 f(2)
 
+
+##### if statements
+
+x<- 10
+
+if(x>5){
+  y<- sin(x)/x
+} else{y<- 5*cos(x)}
+
+
+
+ifelse(x>5, y<- sin(x)/x, y<- 5*cos(x))
+
+
+x <- c(1,2,3,4,5,6,10)
+median((x))
+
+y <- sort(x)
+n <- length(x)
+if(n %% 2 == 0){
+  m <- (y[n/2] + y[n/2+1])/2
+}else{
+  m <- y[(n+1)/2]
+}
+m
+
+
+x <- c(1,4,5,7,9)
+y <- c(4,5,1,9,3)
+R <- 1
+f <- function(x,y, R){
+  sum(x^2+y^2 <=  R^2)
+}
+
+
+
+
+
