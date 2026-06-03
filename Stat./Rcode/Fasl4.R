@@ -115,13 +115,31 @@ m
 
 
 x <- c(1,4,5,7,9)
-y <- c(4,5,1,9,3)
-R <- 1
+y <- c(4,5,1,3)
+R <- 10
 f <- function(x,y, R){
+  if(length(x) != length(y)){
+    stop('the vectors are not in the same length')
+  }
+  else {
   sum(x^2+y^2 <=  R^2)
+  }
+}
+f(x,y,R)
+
+
+gammalik <- function(theta, x){
+  alpha <- theta[1]
+  beta <- theta[2]
+  
+  z <- (1/gamma(alpha)*beta^alpha)*x^(alpha - 1)*exp(-x/beta)
+  y<- ifelse(x >= 0, z, 0)
+  prod(y)
 }
 
 
+gammalik(c(3,1),x)
 
+optim()
 
 
