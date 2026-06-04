@@ -143,3 +143,59 @@ gammalik(c(3,1),x)
 optim()
 
 
+# تمرین -------
+airquality
+# 1
+plot(airquality$Ozone,airquality$Temp)
+
+
+# 2:
+rg <- rgamma(1000,3,5)
+hist(rg, probability = T , label=T)
+lines(density(rg), lwd = 3, col = 'red')
+
+
+# 3:
+
+theta <- seq(0, 2*pi, length.out = 1000)
+
+k <- 4  
+a <- 1 
+
+r <- a * cos(k * theta)
+
+x <- r * cos(theta)
+y <- r * sin(theta)
+
+# رسم
+plot(x, y, type = "l", col = "blue", lwd = 2,
+     xlab = "X", ylab = "Y", 
+     asp = 1)  s
+polygon(x, y, col = rgb(1, 1, 0, 0.3))
+abline(h = 0, v = 0, col = "gray", lty = 2)
+abline(a = 0, b = 1, col = "red", lwd = 2)   # y = x (شیب 1)
+
+
+# 4:
+sleep
+boxplot(sleep$extra , sleep$group == 1)
+# the first one is more effective
+
+# 5:
+city = c("Kermanshah", "Eslamabad-e Gharb", "Javanrud", "Sonqor", 
+         "Sarpol-e Zahab", "Paveh", "Gilan-e Gharb", "Qasr-e Shirin", 
+         "Ravansar", "Dalahu", "Harsin", "Kangavar", "Sahneh", 
+         "Salas-e Babajani", "Nowdeshah")
+population = c(946651, 90440, 54354, 48498, 45281, 
+               25868, 22331, 18340, 16816, 15973, 
+               14867, 13241, 12800, 8500, 4200)
+
+length(population)
+M <- data.frame(city, population)
+M
+plot(1:15,population, type = 'h', lwd = 13, col = 'red')
+
+
+
+
+
