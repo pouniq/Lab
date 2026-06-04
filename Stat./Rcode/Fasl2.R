@@ -37,8 +37,30 @@ df_sorted
 
 
 # 5
-c()
+iran_provinces <- c(
+  "Alborz", "Ardabil", "Bushehr", "Chaharmahal and Bakhtiari", 
+  "East Azerbaijan", "Esfahan", "Fars", "Gilan", "Golestan", 
+  "Hamadan", "Hormozgan", "Ilam", "Kerman", "Kermanshah", 
+  "Khuzestan", "Kohgiluyeh and Boyer-Ahmad", "Kurdistan", 
+  "Lorestan", "Markazi", "Mazandaran", "North Khorasan", 
+  "Qazvin", "Qom", "Razavi Khorasan", "Semnan", 
+  "Sistan and Baluchestan", "South Khorasan", "Tehran", 
+  "West Azerbaijan", "Yazd", "Zanjan"
+)
 
+iran_pop <- c(
+  2712400, 1270420, 1163400, 947763, 
+  3909652, 5120850, 4851274, 2530696, 1868819, 
+  1738234, 1776415, 580158, 3164718, 1952434, 
+  4710509, 713052, 1603011, 1760649, 1429475, 
+  3283582, 863092, 1273761, 1292283, 6434501, 
+  702360, 2775014, 768898, 13267637, 3265219, 
+  1138533, 1057461
+)
+
+dfIran <- data.frame(iran_provinces,iran_pop )
+
+?Dataframe
 
 
 
