@@ -166,7 +166,7 @@ abline(a = 0, b = 1, col = "red", lwd = 2)   # y = x (شیب 1)
 sleep
 boxplot(sleep$extra[sleep$group == 1] , sleep$extra[sleep$group == 2] , 
         horizontal = T )
-# the first one is more effective
+# the second one is more effective
 
 # 5:
 city = c("Kermanshah", "Eslamabad-e Gharb", "Javanrud", "Sonqor", 
