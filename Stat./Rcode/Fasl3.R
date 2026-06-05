@@ -164,7 +164,8 @@ abline(a = 0, b = 1, col = "red", lwd = 2)   # y = x (شیب 1)
 
 # 4:
 sleep
-boxplot(sleep$extra , sleep$group == 1)
+boxplot(sleep$extra[sleep$group == 1] , sleep$extra[sleep$group == 2] , 
+        horizontal = T )
 # the first one is more effective
 
 # 5:
@@ -178,8 +179,8 @@ population = c(946651, 90440, 54354, 48498, 45281,
 
 length(population)
 M <- data.frame(city, population)
-M
-plot(1:15,population, type = 'h', lwd = 13, col = 'red')
+plot(1:15,M$population, type = 'h', lwd = 3, col = 'red',
+     xlab = 'city', ylab = 'population')
 
 
 
