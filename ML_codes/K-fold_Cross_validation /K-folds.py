@@ -46,7 +46,13 @@ for i, val in enumerate(a, start=1):
     print(f'index {i} is equal to {val}')
     
     
-    
+
+
+acc_list = []
+precision_list = []
+f1_list = []
+recall_list = []
+roc_auc_list = []
 
 
 for fold, (train_idx, test_idx) in enumerate(kf.split(X), start=1):
@@ -66,18 +72,40 @@ for fold, (train_idx, test_idx) in enumerate(kf.split(X), start=1):
     
     # getting the prediction:
     y_train_pred = model.predict(X_train)
-    y_pred = model.predict(X_test)
+    y_pred = model.predict(X_test_scaled)
     y_prob = model.predict_proba(X_test)
     
+    # metrics:
     
+    acc = accuracy_score(y_test, y_pred)    
+    f1 = f1_score(y_test, y_pred)    
+    recall = recall_score(y_test, y_pred)    
+    roc_auc = roc_auc_score(y_test, y_pred)    
+    prec = precision_score(y_test, y_pred)    
     
+    # store metrics:
+    acc_list.append(acc)
+    precision_list.append(prec)
+    f1_list.append(f1)
+    roc_auc_list.append(roc_auc)
+    recall_list.append(recall)
+    
+    print(f'fold: {fold}')
+    print(f'accuracy {acc :.3f}')
+    print(f'precision {prec :.3f}')
+    print(f'f1 score {f1 :.3f}')
+    print(f'roc_auc {roc_auc :.3f}')
+    print(f'recall  {recall :.3f}')
+    print('----'*50)
       
     
     
     
-    
-    
-    
+print(np.mean(acc_list) * 100)
+print(np.mean(f1_list)) 
+print(np.mean(precision_list)) 
+print(np.mean(roc_auc_list)) 
+print(np.mean(recall_list)) 
     
     
     

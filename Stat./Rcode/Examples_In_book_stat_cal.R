@@ -3,6 +3,8 @@ choose(5,2)
 ## Derivative ----
 D(expression(3*x^2) , 'x')
 
+sample(1:5,1,prob = c(100,1,2,3,1))
+?sample
 
 ## Distributions ----
 # we have d,p,q,r:
