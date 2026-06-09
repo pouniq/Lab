@@ -8,6 +8,8 @@ editor: visual
 
 ## روش عددی در مثال ۶.۶
 
+![](images/Screenshot 1405-03-18 at 16.41.40.png)
+
 اول از همه ما یک سری داده داریم که در جدول زیر مشخص شده است.
 
 ![](images/Screenshot 1405-03-17 at 10.21.52.png)
@@ -28,7 +30,7 @@ y
 فرمول وایبل نیز به این صورت است:
 $$f(t,\lambda, \beta) = \beta\lambda^{\beta}t^{\beta-1}e^{-(\lambda t)^\beta}$$
 
-که log-likelihood آن هم به این شکل می شود
+که likelihood آن هم به این شکل می شود
 
 $$l(\lambda , \beta) = \sum_{i=1}^{n} [ln(\beta) + \beta ln(\lambda) + (\beta - 1) ln(t_i) - (\lambda t_i)^\beta]$$
 
@@ -65,7 +67,7 @@ f <- function(params, y){
 #| warning: false
 #| dir: ltr
 initialval <- c(1,1)
-optim(initialval, f,
+output <- optim(initialval, f,
       y = y,
       control = list(fnscale = -1),
       method = "BFGS",
@@ -81,6 +83,72 @@ optim(initialval, f,
 
 - بعد از آن داده هایی که از مسئله داشتیم را درون تابع optim() جایگذاری میکنیم
 
-- تابع optim به صورت default تابعی که داریم را مینیمم می کند با دستوری که قرار دادیم ، تابعی که به ما می دهد ماکزیمم هست
+- تابع optim به صورت default تابعی که داریم را مینیمم می کند با دستوری که قرار دادیم control = list(fnscale = -1) ، تابعی که در optim() قرار می دهیم خروجی ماکزیمم خواهد بود.
 
 - method و hessian هم به روشی که برای بدست آورد جواب نیاز داریم اشاره می کند.
+
+یا اگر طبق فرمول 6.12 پیش برویم که برابر است با :
+
+$$\lambda = [\frac{1}{n} \sum_{i=1}^{n} t_i^{\beta}]^{-\frac{1}{\beta}}$$
+
+```{r}
+
+
+lm <- function(y,betaP){
+  n <- length(y)
+  lambda <- ( (1/n) * sum(y^betaP) )^(-1/betaP)
+  lambda
+}
+
+```
+
+```{r}
+lm(y,output$par[2])
+```
+
+که با فرمول خود کتاب هم که محاسبه شد عددی نزدیک به عددی که برآورد شد یعنی 0.009184599 به دست آمد که یعنی برآورد ما طبق کتاب نیز درست است.
+
+\<!--
+
+## حل به روش عددی مثال 
+
+## ۶.۸
+
+##  ![](images/clipboard-2402769530.png)
+
+![](images/clipboard-1058952336.png)
+
+جدول مربوطه:
+
+![](images/clipboard-1226860636.png)
+
+تابع likelihood برای زمانی که سانسور به صورت بازه ای است به اینصورت خواهد بود:
+$$l(\lambda, \beta) = \sum_{i=1}^{k}r_iln[e^{-(\lambda t_{i-1}^{\beta} - e^{-(\lambda t_i)^\beta})}] - \sum_{i=1}^{k} m_i (\lambda t_i)^\beta$$
+
+```{r}
+#| dir: ltr
+f <- function(params, y){
+  
+  lambda <- params[1]
+  beta <- params[2]
+  n <- length(y)
+  
+  q <- exp(-(lambda * t[-length(t)])^beta) -
+    exp(-(lambda * t[-1])^beta)
+  
+  sum(r * log(q)) - sum(m * (lambda*t[-1])^beta)
+  
+}
+```
+
+```{r}
+t0 <- c(2.4,3.2,3.8,4.2,5.0,5.0, 6.2,7.6,8.4,8.4,8.8,8.8)
+t1 <- c(2.6,3.4,4,4.4,5.2,5.2,6.4,7.8,8.6,8.6,Inf,Inf)
+
+
+failed <- c(0,0,1,1,1,1,1,1,1,1,0,0)
+censored <- c(1,1,0,0,0,0,0,0,0,0,1,1)
+
+```
+
+--\>

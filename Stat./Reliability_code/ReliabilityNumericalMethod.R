@@ -64,9 +64,89 @@ optim(initialval, f,
       hessian = TRUE)
 
 
+L <- c(2.4,3.2,3.8,4.2,5.0,5.0,
+       6.2,7.6,8.4,8.4,8.8,8.8)
+
+R <- c(2.6,3.4,4.0,4.4,5.2,5.2,
+       6.4,7.8,8.6,8.6,Inf,Inf)
+
+loglik <- function(par){
+  
+  lambda <- par[1]
+  beta   <- par[2]
+  
+  if(lambda <= 0 || beta <= 0)
+    return(1e20)
+  
+  S <- function(t)
+    exp(-(lambda*t)^beta)
+  
+  ll <- 0
+  
+  for(i in seq_along(L)){
+    
+    if(is.infinite(R[i])){
+      
+      ll <- ll + log(S(L[i]))
+      
+    } else {
+      
+      ll <- ll + log(S(L[i]) - S(R[i]))
+      
+    }
+  }
+  
+  -ll
+}
+
+fit <- optim(
+  par = c(0.1,2),
+  fn = loglik,
+  method = "L-BFGS-B",
+  lower = c(1e-8,1e-8)
+)
+
+fit$par
 
 
 
 
+t0 <- c(2.4,3.2,3.8,4.2,5.0,6.2,7.6,8.4)
+t1 <- c(2.6,3.4,4.0,4.4,5.2,6.4,7.8,8.6)
+
+r  <- c(1,1,1,1,2,1,1,2)
+
+tc <- 8.8      # زمان سانسور
+m  <- 2        # تعداد سانسور شده‌ها
+
+
+loglik <- function(par){
+  
+  lambda <- par[1]
+  beta   <- par[2]
+  
+  if(lambda <= 0 || beta <= 0)
+    return(-Inf)
+  
+  S <- function(t)
+    exp(-(lambda*t)^beta)
+  
+  ll <- sum(
+    r * log(S(t0) - S(t1))
+  ) +
+    m * log(S(tc))
+  
+  ll
+}
+
+
+fit <- optim(
+  par = c(0.1,5),
+  fn  = function(par) -loglik(par),
+  method = "L-BFGS-B",
+  lower = c(1e-10,1e-10)
+)
+
+fit$par
 
 

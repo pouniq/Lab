@@ -139,6 +139,7 @@ window.Quarto = {
 
 <section id="روش-عددی-در-مثال-۶.۶" class="level2">
 <h2 class="anchored" data-anchor-id="روش-عددی-در-مثال-۶.۶">روش عددی در مثال ۶.۶</h2>
+<p><img src="images/Screenshot%201405-03-18%20at%2016.41.40.png" class="img-fluid"></p>
 <p>اول از همه ما یک سری داده داریم که در جدول زیر مشخص شده است.</p>
 <p><img src="images/Screenshot%201405-03-17%20at%2010.21.52.png" class="img-fluid"></p>
 <div class="cell" dir="ltr">
@@ -153,7 +154,7 @@ window.Quarto = {
 </div>
 </div>
 <p>فرمول وایبل نیز به این صورت است: <span class="math display">\[f(t,\lambda, \beta) = \beta\lambda^{\beta}t^{\beta-1}e^{-(\lambda t)^\beta}\]</span></p>
-<p>که log-likelihood آن هم به این شکل می شود</p>
+<p>که likelihood آن هم به این شکل می شود</p>
 <p><span class="math display">\[l(\lambda , \beta) = \sum_{i=1}^{n} [ln(\beta) + \beta ln(\lambda) + (\beta - 1) ln(t_i) - (\lambda t_i)^\beta]\]</span></p>
 <p>که حالا اگر sum را روی آنها تاثیر بدهیم به این شکل می شود <span class="math display">\[l(\lambda , \beta) =  [nln(\beta) + n\beta ln(\lambda) + (\beta - 1) \sum_{i=1}^{n} ln(t_i) - \sum_{i=1}^{n}(\lambda t_i)^\beta]\]</span></p>
 <p>در کتاب آورده شده است که میتوان مستقیما این فرمول را ماکزیمم کرد یا از مشتق آن به صورت تکرار اعداد را بدست آورد.</p>
@@ -178,42 +179,73 @@ window.Quarto = {
 <p>بعد از تعریف تابع باید این تابع را به روش های عددی ماکزیمم کنیم:</p>
 <div class="cell" dir="ltr">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>initialval <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">optim</span>(initialval, f,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">optim</span>(initialval, f,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> y,</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">control =</span> <span class="fu">list</span>(<span class="at">fnscale =</span> <span class="sc">-</span><span class="dv">1</span>),</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">method =</span> <span class="st">"BFGS"</span>,</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">hessian =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$par
-[1] 0.009184599 1.878197671
-
-$value
-[1] -106.5273
-
-$counts
-function gradient 
-     118       23 
-
-$convergence
-[1] 0
-
-$message
-NULL
-
-$hessian
-             [,1]       [,2]
-[1,] -848011.5291 -947.21582
-[2,]    -947.2158  -10.22236</code></pre>
-</div>
 </div>
 <ul>
 <li><p>اول از همه یک نقطه شروع برای پارامتر ها در نظر می گیریم که در initialvalue آنها را قرار می دهیم که برای هر دو پارامتر 1, 1 در نظر گرفته شد</p></li>
 <li><p>تابع optim() را فراخوانی می کنیم و اول از همه مقادیر اولیه را در آن قرار می دهیم.</p></li>
 <li><p>بعد از آن تابع f که میخواهیم بهینه سازی کنیم را در تابع قرار می دهیم</p></li>
 <li><p>بعد از آن داده هایی که از مسئله داشتیم را درون تابع optim() جایگذاری میکنیم</p></li>
-<li><p>تابع optim به صورت default تابعی که داریم را مینیمم می کند با دستوری که قرار دادیم ، تابعی که به ما می دهد ماکزیمم هست</p></li>
+<li><p>تابع optim به صورت default تابعی که داریم را مینیمم می کند با دستوری که قرار دادیم control = list(fnscale = -1) ، تابعی که در optim() قرار می دهیم خروجی ماکزیمم خواهد بود.</p></li>
 <li><p>method و hessian هم به روشی که برای بدست آورد جواب نیاز داریم اشاره می کند.</p></li>
 </ul>
+<p>یا اگر طبق فرمول 6.12 پیش برویم که برابر است با :</p>
+<p><span class="math display">\[\lambda = [\frac{1}{n} \sum_{i=1}^{n} t_i^{\beta}]^{-\frac{1}{\beta}}\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lm <span class="ot">&lt;-</span> <span class="cf">function</span>(y,betaP){</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  lambda <span class="ot">&lt;-</span> ( (<span class="dv">1</span><span class="sc">/</span>n) <span class="sc">*</span> <span class="fu">sum</span>(y<span class="sc">^</span>betaP) )<span class="sc">^</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>betaP)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  lambda</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y,output<span class="sc">$</span>par[<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0091779</code></pre>
+</div>
+</div>
+<p>که با فرمول خود کتاب هم که محاسبه شد عددی نزدیک به عددی که برآورد شد یعنی 0.009184599 به دست آمد که یعنی برآورد ما طبق کتاب نیز درست است.</p>
+<p>&lt;!–</p>
+</section>
+<section id="حل-به-روش-عددی-مثال" class="level2">
+<h2 class="anchored" data-anchor-id="حل-به-روش-عددی-مثال">حل به روش عددی مثال</h2>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section">۶.۸</h2>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1"><img src="images/clipboard-2402769530.png" class="img-fluid"></h2>
+<p><img src="images/clipboard-1058952336.png" class="img-fluid"></p>
+<p>جدول مربوطه:</p>
+<p><img src="images/clipboard-1226860636.png" class="img-fluid"></p>
+<p>تابع likelihood برای زمانی که سانسور به صورت بازه ای است به اینصورت خواهد بود: <span class="math display">\[l(\lambda, \beta) = \sum_{i=1}^{k}r_iln[e^{-(\lambda t_{i-1}^{\beta} - e^{-(\lambda t_i)^\beta})}] - \sum_{i=1}^{k} m_i (\lambda t_i)^\beta\]</span></p>
+<div class="cell" dir="ltr">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(params, y){</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  lambda <span class="ot">&lt;-</span> params[<span class="dv">1</span>]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  beta <span class="ot">&lt;-</span> params[<span class="dv">2</span>]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  q <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>(lambda <span class="sc">*</span> t[<span class="sc">-</span><span class="fu">length</span>(t)])<span class="sc">^</span>beta) <span class="sc">-</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exp</span>(<span class="sc">-</span>(lambda <span class="sc">*</span> t[<span class="sc">-</span><span class="dv">1</span>])<span class="sc">^</span>beta)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(r <span class="sc">*</span> <span class="fu">log</span>(q)) <span class="sc">-</span> <span class="fu">sum</span>(m <span class="sc">*</span> (lambda<span class="sc">*</span>t[<span class="sc">-</span><span class="dv">1</span>])<span class="sc">^</span>beta)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>t0 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.4</span>,<span class="fl">3.2</span>,<span class="fl">3.8</span>,<span class="fl">4.2</span>,<span class="fl">5.0</span>,<span class="fl">5.0</span>, <span class="fl">6.2</span>,<span class="fl">7.6</span>,<span class="fl">8.4</span>,<span class="fl">8.4</span>,<span class="fl">8.8</span>,<span class="fl">8.8</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.6</span>,<span class="fl">3.4</span>,<span class="dv">4</span>,<span class="fl">4.4</span>,<span class="fl">5.2</span>,<span class="fl">5.2</span>,<span class="fl">6.4</span>,<span class="fl">7.8</span>,<span class="fl">8.6</span>,<span class="fl">8.6</span>,<span class="cn">Inf</span>,<span class="cn">Inf</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>failed <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>censored <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>–&gt;</p>
 </section>
 
 </main>
