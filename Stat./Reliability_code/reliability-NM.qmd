@@ -8,11 +8,11 @@ editor: visual
 
 ## روش عددی در مثال ۶.۶
 
-![](images/Screenshot 1405-03-18 at 16.41.40.png)
+![](images/Screenshot%201405-03-18%20at%2016.41.40.png)
 
 اول از همه ما یک سری داده داریم که در جدول زیر مشخص شده است.
 
-![](images/Screenshot 1405-03-17 at 10.21.52.png)
+![](images/Screenshot%201405-03-17%20at%2010.21.52.png)
 
 ```{r}
 #| dir: ltr
@@ -27,15 +27,13 @@ y <- data[,2]
 y
 ```
 
-فرمول وایبل نیز به این صورت است:
-$$f(t,\lambda, \beta) = \beta\lambda^{\beta}t^{\beta-1}e^{-(\lambda t)^\beta}$$
+فرمول وایبل نیز به این صورت است: $$f(t,\lambda, \beta) = \beta\lambda^{\beta}t^{\beta-1}e^{-(\lambda t)^\beta}$$
 
 که likelihood آن هم به این شکل می شود
 
 $$l(\lambda , \beta) = \sum_{i=1}^{n} [ln(\beta) + \beta ln(\lambda) + (\beta - 1) ln(t_i) - (\lambda t_i)^\beta]$$
 
-که حالا اگر sum را روی آنها تاثیر بدهیم به این شکل می شود
-$$l(\lambda , \beta) =  [nln(\beta) + n\beta ln(\lambda) + (\beta - 1) \sum_{i=1}^{n} ln(t_i) - \sum_{i=1}^{n}(\lambda t_i)^\beta]$$
+که حالا اگر sum را روی آنها تاثیر بدهیم به این شکل می شود $$l(\lambda , \beta) =  [nln(\beta) + n\beta ln(\lambda) + (\beta - 1) \sum_{i=1}^{n} ln(t_i) - \sum_{i=1}^{n}(\lambda t_i)^\beta]$$
 
 در کتاب آورده شده است که میتوان مستقیما این فرمول را ماکزیمم کرد یا از مشتق آن به صورت تکرار اعداد را بدست آورد.
 
@@ -110,11 +108,11 @@ lm(y,output$par[2])
 
 \<!--
 
-## حل به روش عددی مثال 
+## حل به روش عددی مثال
 
 ## ۶.۸
 
-##  ![](images/clipboard-2402769530.png)
+## ![](images/clipboard-2402769530.png)
 
 ![](images/clipboard-1058952336.png)
 
@@ -122,8 +120,7 @@ lm(y,output$par[2])
 
 ![](images/clipboard-1226860636.png)
 
-تابع likelihood برای زمانی که سانسور به صورت بازه ای است به اینصورت خواهد بود:
-$$l(\lambda, \beta) = \sum_{i=1}^{k}r_iln[e^{-(\lambda t_{i-1}^{\beta} - e^{-(\lambda t_i)^\beta})}] - \sum_{i=1}^{k} m_i (\lambda t_i)^\beta$$
+تابع likelihood برای زمانی که سانسور به صورت بازه ای است به اینصورت خواهد بود: $$l(\lambda, \beta) = \sum_{i=1}^{k}r_iln[e^{-(\lambda t_{i-1}^{\beta} - e^{-(\lambda t_i)^\beta})}] - \sum_{i=1}^{k} m_i (\lambda t_i)^\beta$$
 
 ```{r}
 #| dir: ltr
