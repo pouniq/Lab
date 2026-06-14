@@ -90,6 +90,7 @@ output <- optim(initialval, f,
 $$\lambda = [\frac{1}{n} \sum_{i=1}^{n} t_i^{\beta}]^{-\frac{1}{\beta}}$$
 
 ```{r}
+#| dir: ltr
 
 
 lm <- function(y,betaP){
@@ -101,51 +102,70 @@ lm <- function(y,betaP){
 ```
 
 ```{r}
+#| dir: ltr
+
 lm(y,output$par[2])
 ```
 
 که با فرمول خود کتاب هم که محاسبه شد عددی نزدیک به عددی که برآورد شد یعنی 0.009184599 به دست آمد که یعنی برآورد ما طبق کتاب نیز درست است.
 
-\<!--
+## مثال ۶.۱
 
-## حل به روش عددی مثال
+$$\frac{\gamma(1 + \frac{2}{\beta})}{\gamma^2(1 + \frac{2}{\beta})} = \frac{m_2}{m^2_1}$$
 
-## ۶.۸
+$$\frac{\gamma(1 + \frac{2}{\beta})}{\gamma^2(1 + \frac{2}{\beta})} - \frac{m_2}{m^2_1} = 0$$
 
-## ![](images/clipboard-2402769530.png)
-
-![](images/clipboard-1058952336.png)
-
-جدول مربوطه:
-
-![](images/clipboard-1226860636.png)
-
-تابع likelihood برای زمانی که سانسور به صورت بازه ای است به اینصورت خواهد بود: $$l(\lambda, \beta) = \sum_{i=1}^{k}r_iln[e^{-(\lambda t_{i-1}^{\beta} - e^{-(\lambda t_i)^\beta})}] - \sum_{i=1}^{k} m_i (\lambda t_i)^\beta$$
+'
 
 ```{r}
 #| dir: ltr
-f <- function(params, y){
-  
-  lambda <- params[1]
-  beta <- params[2]
-  n <- length(y)
-  
-  q <- exp(-(lambda * t[-length(t)])^beta) -
-    exp(-(lambda * t[-1])^beta)
-  
-  sum(r * log(q)) - sum(m * (lambda*t[-1])^beta)
-  
+
+i <- c(1:25)
+t2 <- c(391,510,541,595,622,626,680,694,710,715,746,763,775,932,957,984,1003,1019,1031,1083,1223,1279,1285,1393,1577)
+x <- cbind(i,t)
+```
+
+حالا تابع را در R تعریف می کنیم:
+
+```{r}
+#| dir: ltr
+
+m1 <- mean(t2)
+m2 <- mean(t2^2)
+f2 <- function(beta, m1, m2){
+  gamma(1 + 2/beta) / gamma(1 + 1/beta)^2 - m2/m1^2
 }
 ```
 
 ```{r}
-t0 <- c(2.4,3.2,3.8,4.2,5.0,5.0, 6.2,7.6,8.4,8.4,8.8,8.8)
-t1 <- c(2.6,3.4,4,4.4,5.2,5.2,6.4,7.8,8.6,8.6,Inf,Inf)
+#| dir: ltr
 
+op <- uniroot(f2,
+        interval = c(0.1,40),
+        m1 = m1,
+        m2 = m2)
 
-failed <- c(0,0,1,1,1,1,1,1,1,1,0,0)
-censored <- c(1,1,0,0,0,0,0,0,0,0,1,1)
-
+beta <- op$root
+beta
 ```
 
---\>
+حالا
+
+$$\hat{\lambda}$$
+
+را نیز پیدا می کنیم:
+
+```{r}
+#| dir: ltr
+
+lambdaHat <- (gamma(1 + 1/beta)) / m1
+lambdaHat
+```
+
+حالا چون
+
+$$\beta = 3.298232$$
+
+$$\lambda = 0.001013137$$
+
+را پیدا کردیم میتوانیم توزیع این داده ها را نیز پیدا کنیم که می شود
