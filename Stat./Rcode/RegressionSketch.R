@@ -91,4 +91,98 @@ anova(lm(y ~ x1 + x2 + x3 + x4))
 
 
 
+install.packages("GLMsData")
+library(GLMsData)
+data(windmill)
+head(windmill)
+y <- windmill$DC
+x <- windmill$Wind
+
+fit0 <- lm(x ~ y)
+summary(fit0)
+
+plot(fit0,pch=19)
+
+# transform on X:
+w <- x*log(x)
+fit_xt <- lm(y ~ x + w)
+summary(fit_xt)
+
+alpha0 <- 1
+alpha1 <- fit_xt$coefficients[3] / fit0$coefficients[2] + alpha0
+
+x.prime <- x^alpha1
+
+
+fit_xtt <- lm(y ~ x.prime )
+
+# Transformations ----
+
+
+## first Transformations -----
+# the best one by far.
+x.star <- 1/x
+fit1 <- lm(x.star ~ y)
+summary(fit1)
+
+plot(fit1)
+
+## Second Transformations ----
+x.star1 <- x^2
+fit2 <- lm(x.star1 ~ y)
+summary(fit2)
+
+
+## Third Transformations ----
+x.star2 <- x^3
+fit3 <- lm(x.star2 ~ y)
+summary(fit3)
+
+
+
+## box-cox example:
+install.packages('sp')
+library(sp)
+data(meuse)  
+head(meuse)
+attach(meuse)
+
+y <- meuse$zinc
+x1 <- meuse$elev
+x2 <- meuse$dist
+fit0 <- lm(y ~ x1 + x2)
+summary(fit0)
+plot(fit0)
+
+bc <- boxcox(zinc ~ elev + dist , data = meuse)
+(lambda <- bc$x[which.max(bc$y)])
+zinc.bc<- (zinc^lambda-1)/lambda
+
+
+
+fit1 <- lm(zinc.bc ~ x1 + x2)
+summary(fit1)
+plot(fit1)
+
+
+par(mfrow=c(2,2))
+plot(fit2)
+
+
+
+## linearity ----
+### goodness of fitness ----
+
+### scatter plot ----
+plot(windmill$Wind , windmill$DC)
+### partial regression (added plots) when we have multiple variables ----
+### Past expriences ---- 
+## Normal Error ----
+## Constant Variance ( Multicollinearity )  ----
+## homoscedasticity ----
+
+
+
+
+
 
