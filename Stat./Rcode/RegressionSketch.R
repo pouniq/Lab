@@ -112,9 +112,12 @@ alpha0 <- 1
 alpha1 <- fit_xt$coefficients[3] / fit0$coefficients[2] + alpha0
 
 x.prime <- x^alpha1
+fit_xtt <- lm(y ~ x.prime)
 
 
-fit_xtt <- lm(y ~ x.prime )
+w.prime <- x.prime * log(x.prime)
+fit_x2 <- lm(y ~ x.prime + w.prime)
+summary(fit_x2)
 
 # Transformations ----
 
