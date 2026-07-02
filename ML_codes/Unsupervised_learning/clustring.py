@@ -56,4 +56,30 @@ k_means = KMeans(n_clusters= k , random_state=42, n_init=10)
 k_means.fit(x_scaled)
 
 k_means_prediction = k_means.predict(x_scaled)
+df['pred'] = k_means_prediction
 
+# silhouette score
+k_means_score = silhouette_score(x_scaled, k_means_prediction)
+
+# it will range from -1 to +1
+# how well each point will be assign to its cluster
+# NOTE: 1. cohesive: how well it is in its own cluster.
+# 2.Separation: how each cluster is distant from other clusters.
+
+# visualization:
+feature_paris = [
+    ('sepal length (cm)', 'sepal width (cm)'),
+    ('petal length (cm)', 'petal width (cm)')
+]
+for x, y in feature_paris:
+    # print(f'{x} | {y}')
+    plt.figure(figsize=(10,7)),
+    sns.scatterplot(
+        data=df,
+        x=x,
+        y=y,
+        hue=k_means_prediction,
+        palette='tab10'
+    )
+    plt.title(f'clusters for {x}, {y}')
+    plt.show()
