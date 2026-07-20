@@ -183,5 +183,38 @@ plot(1:15,M$population, type = 'h', lwd = 3, col = 'red',
      xlab = 'city', ylab = 'population')
 
 
+plot(x, type="b", col="red", pch=19, lwd=2, main="Sales")
+
+plot(trees$Volume , trees$Girth)
+points(50, 15, col = 'blue')
+abline(a = -10 , b= 5, col = 'red', lty = 2)
+text(locator(1), 'outlier')
+lines(c(20,80), c(20,10), col = 'green')
 
 
+hist(trees$Volume, breaks = 8, probability = T)
+hist(trees$Volume, breaks = 8, freq = F)
+
+?hist
+s <- 0 
+for (i in 1:100){
+  s <- s + i
+}
+s
+
+sum(1:100)
+
+function(n){
+  for(i in n){
+    
+  }
+}
+
+f <- function(x){
+  x^3 - 3*x +1
+}
+
+curve(f, -3, 3)
+uniroot(f , c(-2,2))
+
+integrate(f,0 , 2)

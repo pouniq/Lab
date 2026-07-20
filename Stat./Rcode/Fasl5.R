@@ -110,7 +110,7 @@ ks.test(obs, 'pnorm', mean= mean(obs), sd= sd(obs), alternative= 'less')
 
 
 # F(t) > F(t_0)
-ks.test(obs, 'pnorm', mean= mean(obs), sd= sd(obs), alternative= 'greater')
+ks.test(obs, 'pnorm', mean= mean(obs), sd= sd(obs), alternative= 'greater', correct = T)
 
 
 # exponential 
