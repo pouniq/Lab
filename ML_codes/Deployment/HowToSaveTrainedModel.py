@@ -55,3 +55,23 @@ joblib_path = "/Users/pouniq/Lab/ML_codes/Deployment/model_dir/diabetes_logistic
 dump(model_pip, joblib_path)
 print(f"Saved with Joblib -> {joblib_path}")
 
+
+# in some cases we want to only save model
+model  = LogisticRegression()
+model.fit(X_train, y_train)
+dump(model , joblib_path)
+
+###############################################
+##  PICKLE ####################################
+###############################################
+import pickle
+pickle_path = "/Users/pouniq/Lab/ML_codes/Deployment/model_dir/diabetes_logistic.pkl" 
+
+with open(pickle_path, 'wb') as f:
+    pickle.dump(model_pip, f)
+    
+print(f"saved with pickel -> {pickle_path}")
+
+
+
+# how can we load the model back 
