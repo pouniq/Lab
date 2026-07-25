@@ -1,0 +1,19 @@
+# project root
+project_root = "project/root/dir"
+
+# dataset 
+DATASET_NAME= DATASET_NAME
+
+# output directories
+MODEL_DIR= model_dir
+LOG_DIR = logs
+
+# files
+MODEL_NAME = "model_name.joblib"
+LOG_NAME = "app.log"
+
+# training config.
+TARGET_COL = "Outcome"
+TEST_SIZE = 0.2
+RANDOM_STATE = 42
+

@@ -1,0 +1,120 @@
+2026-07-25 16:00:17,937 - INFO - /Users/pouniq/Lab/ML_codes/Deployment/train_pred_dep/diabetes.csv
+2026-07-25 16:00:17,937 - INFO - /Users/pouniq/Lab/ML_codes/Deployment/train_pred_dep/model_dir/diabetes_pipeline_trainde.joblib
+2026-07-25 16:01:12,420 - INFO - Training section is started
+2026-07-25 16:02:26,131 - INFO - Training section is started
+2026-07-25 16:04:44,619 - INFO - Training section is started
+2026-07-25 16:04:59,846 - INFO - Training section is started
+2026-07-25 16:04:59,851 - INFO - dataframe is now in place with shape of (768, 9)
+2026-07-25 16:04:59,854 - INFO - X and y are now separated
+2026-07-25 16:04:59,857 - INFO - Train Test split is done.
+2026-07-25 16:08:53,800 - INFO - Training section is started
+2026-07-25 16:08:53,807 - INFO - dataframe is now in place with shape of (768, 9)
+2026-07-25 16:08:53,810 - INFO - X and y are now separated
+2026-07-25 16:08:53,832 - INFO - Train Test split is done.
+2026-07-25 16:08:53,834 - ERROR - training script failed: y should be a 1d array, got an array of shape (154, 8) instead.
+Traceback (most recent call last):
+  File "/Users/pouniq/Lab/ML_codes/Deployment/train_pred_dep/train_dep.py", line 66, in train_model
+    pip.fit(X_train, y_train)
+  File "/Users/pouniq/Lab/ML_codes/Deployment/.deploymentEnv/lib/python3.11/site-packages/sklearn/base.py", line 1403, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pouniq/Lab/ML_codes/Deployment/.deploymentEnv/lib/python3.11/site-packages/sklearn/pipeline.py", line 649, in fit
+    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
+  File "/Users/pouniq/Lab/ML_codes/Deployment/.deploymentEnv/lib/python3.11/site-packages/sklearn/base.py", line 1403, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pouniq/Lab/ML_codes/Deployment/.deploymentEnv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py", line 1459, in fit
+    X, y = validate_data(
+           ^^^^^^^^^^^^^^
+  File "/Users/pouniq/Lab/ML_codes/Deployment/.deploymentEnv/lib/python3.11/site-packages/sklearn/utils/validation.py", line 3055, in validate_data
+    X, y = check_X_y(X, y, **check_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pouniq/Lab/ML_codes/Deployment/.deploymentEnv/lib/python3.11/site-packages/sklearn/utils/validation.py", line 1344, in check_X_y
+    y = _check_y(y, multi_output=multi_output, y_numeric=y_numeric, estimator=estimator)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pouniq/Lab/ML_codes/Deployment/.deploymentEnv/lib/python3.11/site-packages/sklearn/utils/validation.py", line 1365, in _check_y
+    y = column_or_1d(y, warn=True)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pouniq/Lab/ML_codes/Deployment/.deploymentEnv/lib/python3.11/site-packages/sklearn/utils/validation.py", line 1447, in column_or_1d
+    raise ValueError(
+ValueError: y should be a 1d array, got an array of shape (154, 8) instead.
+2026-07-25 16:09:19,345 - INFO - Training section is started
+2026-07-25 16:09:19,351 - INFO - dataframe is now in place with shape of (768, 9)
+2026-07-25 16:09:19,356 - INFO - X and y are now separated
+2026-07-25 16:09:19,381 - INFO - Train Test split is done.
+2026-07-25 16:09:19,384 - ERROR - training script failed: y should be a 1d array, got an array of shape (154, 8) instead.
+Traceback (most recent call last):
+  File "<ipython-input-2-19f072709c5c>", line 66, in train_model
+    pip.fit(X_train, y_train)
+  File "/Users/pouniq/Lab/ML_codes/Deployment/.deploymentEnv/lib/python3.11/site-packages/sklearn/base.py", line 1403, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pouniq/Lab/ML_codes/Deployment/.deploymentEnv/lib/python3.11/site-packages/sklearn/pipeline.py", line 649, in fit
+    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
+  File "/Users/pouniq/Lab/ML_codes/Deployment/.deploymentEnv/lib/python3.11/site-packages/sklearn/base.py", line 1403, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pouniq/Lab/ML_codes/Deployment/.deploymentEnv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py", line 1459, in fit
+    X, y = validate_data(
+           ^^^^^^^^^^^^^^
+  File "/Users/pouniq/Lab/ML_codes/Deployment/.deploymentEnv/lib/python3.11/site-packages/sklearn/utils/validation.py", line 3055, in validate_data
+    X, y = check_X_y(X, y, **check_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pouniq/Lab/ML_codes/Deployment/.deploymentEnv/lib/python3.11/site-packages/sklearn/utils/validation.py", line 1344, in check_X_y
+    y = _check_y(y, multi_output=multi_output, y_numeric=y_numeric, estimator=estimator)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pouniq/Lab/ML_codes/Deployment/.deploymentEnv/lib/python3.11/site-packages/sklearn/utils/validation.py", line 1365, in _check_y
+    y = column_or_1d(y, warn=True)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pouniq/Lab/ML_codes/Deployment/.deploymentEnv/lib/python3.11/site-packages/sklearn/utils/validation.py", line 1447, in column_or_1d
+    raise ValueError(
+ValueError: y should be a 1d array, got an array of shape (154, 8) instead.
+2026-07-25 16:10:21,803 - INFO - Training section is started
+2026-07-25 16:10:21,810 - INFO - dataframe is now in place with shape of (768, 9)
+2026-07-25 16:10:21,814 - INFO - X and y are now separated
+2026-07-25 16:10:21,832 - INFO - Train Test split is done.
+2026-07-25 16:10:21,852 - INFO - Model Training Completed
+2026-07-25 16:13:30,406 - INFO - Training section is started
+2026-07-25 16:13:30,414 - INFO - dataframe is now in place with shape of (768, 9)
+2026-07-25 16:13:30,417 - INFO - X and y are now separated
+2026-07-25 16:13:30,441 - INFO - Train Test split is done.
+2026-07-25 16:13:30,459 - INFO - Model Training Completed
+2026-07-25 16:13:30,470 - INFO - prediction accuracy
+2026-07-25 16:13:30,471 - INFO - prediction report
+2026-07-25 16:15:46,389 - INFO - Training section is started
+2026-07-25 16:15:46,396 - INFO - dataframe is now in place with shape of (768, 9)
+2026-07-25 16:15:46,399 - INFO - X and y are now separated
+2026-07-25 16:15:46,419 - INFO - Train Test split is done.
+2026-07-25 16:15:46,435 - INFO - Model Training Completed
+2026-07-25 16:15:46,447 - INFO - prediction accuracy
+2026-07-25 16:15:46,447 - INFO - prediction report
+2026-07-25 16:15:46,448 - INFO - model moved to /Users/pouniq/Lab/ML_codes/Deployment/train_pred_dep/model_dir/diabetes_pipeline_trainde.joblib
+2026-07-25 16:15:46,448 - INFO - Training Script finished.
+2026-07-25 16:16:21,216 - INFO - Training section is started
+2026-07-25 16:16:21,223 - INFO - dataframe is now in place with shape of (768, 9)
+2026-07-25 16:16:21,226 - INFO - X and y are now separated
+2026-07-25 16:16:21,241 - INFO - Train Test split is done.
+2026-07-25 16:16:21,249 - INFO - Model Training Completed
+2026-07-25 16:16:21,261 - INFO - prediction accuracy
+2026-07-25 16:16:21,261 - INFO - prediction report
+2026-07-25 16:16:21,261 - INFO - model moved to /Users/pouniq/Lab/ML_codes/Deployment/train_pred_dep/model_dir/diabetes_pipeline_trainde.joblib
+2026-07-25 16:16:21,262 - INFO - Training Script finished.
+2026-07-25 16:18:03,472 - INFO - Training section is started
+2026-07-25 16:18:03,479 - INFO - dataframe is now in place with shape of (768, 9)
+2026-07-25 16:18:03,481 - INFO - X and y are now separated
+2026-07-25 16:18:03,498 - INFO - Train Test split is done.
+2026-07-25 16:18:03,505 - INFO - Model Training Completed
+2026-07-25 16:18:03,518 - INFO - train prediction accuracy 0.760586319218241
+2026-07-25 16:18:03,518 - INFO - test prediction accuracy 0.7337662337662337
+2026-07-25 16:18:03,518 - INFO - train prediction report               precision    recall  f1-score   support
+
+           0       0.84      0.78      0.81       400
+           1       0.64      0.73      0.68       214
+
+    accuracy                           0.76       614
+   macro avg       0.74      0.75      0.74       614
+weighted avg       0.77      0.76      0.76       614
+
+2026-07-25 16:18:03,518 - INFO - test prediction report 0.7337662337662337
+2026-07-25 16:18:03,519 - INFO - model moved to /Users/pouniq/Lab/ML_codes/Deployment/train_pred_dep/model_dir/diabetes_pipeline_trainde.joblib
+2026-07-25 16:18:03,519 - INFO - Training Script finished.
