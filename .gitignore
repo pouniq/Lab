@@ -7,3 +7,5 @@ ML_codes/Deployment/.deploymentEnv
 .env
 .virtual_documents
 .ipynb_checkpoints
+ML_codes/Streamlit/.venv
+ .vscode/settings.json
