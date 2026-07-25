@@ -5,3 +5,5 @@
 .log 
 ML_codes/Deployment/.deploymentEnv
 .env
+.virtual_documents
+.ipynb_checkpoints
