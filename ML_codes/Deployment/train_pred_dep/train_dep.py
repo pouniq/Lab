@@ -37,7 +37,7 @@ def train_model():
             format="%(asctime)s - %(levelname)s - %(message)s",
             handlers=[
                 logging.StreamHandler(),  # terminal
-                logging.FileHandler("app.log")  # file
+                logging.FileHandler(LOG_PATH)  # file
             ],
         )
         

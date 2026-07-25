@@ -1,0 +1,42 @@
+2026-07-25 16:31:03,591 - INFO - Training section is started
+2026-07-25 16:31:03,598 - INFO - dataframe is now in place with shape of (768, 9)
+2026-07-25 16:31:03,601 - INFO - X and y are now separated
+2026-07-25 16:31:03,621 - INFO - Train Test split is done.
+2026-07-25 16:31:03,638 - INFO - Model Training Completed
+2026-07-25 16:31:03,651 - INFO - train prediction accuracy 0.760586319218241
+2026-07-25 16:31:03,651 - INFO - test prediction accuracy 0.7337662337662337
+2026-07-25 16:31:03,651 - INFO - train prediction report               precision    recall  f1-score   support
+
+           0       0.84      0.78      0.81       400
+           1       0.64      0.73      0.68       214
+
+    accuracy                           0.76       614
+   macro avg       0.74      0.75      0.74       614
+weighted avg       0.77      0.76      0.76       614
+
+2026-07-25 16:31:03,651 - INFO - test prediction report 0.7337662337662337
+2026-07-25 16:31:03,653 - INFO - model moved to /Users/pouniq/Lab/ML_codes/Deployment/train_pred_dep/model_dir/diabetes_pipeline_trainde.joblib
+2026-07-25 16:31:03,653 - INFO - Training Script finished.
+2026-07-25 16:40:07,792 - INFO - Training section is started
+2026-07-25 16:40:07,797 - INFO - dataframe is now in place with shape of (768, 9)
+2026-07-25 16:40:07,800 - INFO - X and y are now separated
+2026-07-25 16:40:07,820 - INFO - Train Test split is done.
+2026-07-25 16:40:07,839 - INFO - Model Training Completed
+2026-07-25 16:40:07,851 - INFO - train prediction accuracy 0.760586319218241
+2026-07-25 16:40:07,851 - INFO - test prediction accuracy 0.7337662337662337
+2026-07-25 16:40:07,851 - INFO - train prediction report               precision    recall  f1-score   support
+
+           0       0.84      0.78      0.81       400
+           1       0.64      0.73      0.68       214
+
+    accuracy                           0.76       614
+   macro avg       0.74      0.75      0.74       614
+weighted avg       0.77      0.76      0.76       614
+
+2026-07-25 16:40:07,851 - INFO - test prediction report 0.7337662337662337
+2026-07-25 16:40:07,853 - INFO - model moved to /Users/pouniq/Lab/ML_codes/Deployment/train_pred_dep/model_dir/diabetes_pipeline_trainde.joblib
+2026-07-25 16:40:07,853 - INFO - Training Script finished.
+2026-07-25 16:40:43,339 - INFO - model loaded
+2026-07-25 16:45:23,360 - INFO - model loaded
+2026-07-25 16:47:33,998 - INFO - model loaded
+2026-07-25 16:47:34,018 - INFO - You do NOT have diabetes
