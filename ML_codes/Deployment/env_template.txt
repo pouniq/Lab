@@ -1,0 +1,7 @@
+
+DATASET_PATH = "path/your/dataset/"
+MODEL_PATH = "path/your/model"
+ENVIROMENT = Your_env
+TARGET_COL = "yourTargetValue"
+API_KEY = 'Your_api_key'
+

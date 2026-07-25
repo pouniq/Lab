@@ -3,3 +3,5 @@
 /.Lab
 ./Lab
 .log 
+ML_codes/Deployment/.deploymentEnv
+ML_codes/Deployment/.env

@@ -1,0 +1,32 @@
+2026-07-25 12:38:49,534 - INFO - program started
+2026-07-25 12:38:49,534 - DEBUG - debugging code
+2026-07-25 12:46:29,627 - INFO - program started
+2026-07-25 12:46:29,629 - DEBUG - debugging code
+2026-07-25 12:46:29,632 - WARNING - WARNING
+2026-07-25 12:46:29,636 - ERROR - ERROR
+2026-07-25 12:46:33,168 - INFO - program started
+2026-07-25 12:46:33,168 - DEBUG - debugging code
+2026-07-25 12:46:33,168 - WARNING - WARNING
+2026-07-25 12:46:33,168 - ERROR - ERROR
+2026-07-25 12:46:56,987 - INFO - program started
+2026-07-25 12:46:56,987 - DEBUG - debugging code
+2026-07-25 12:46:56,987 - WARNING - this is a WARNING message
+2026-07-25 12:46:56,987 - ERROR - this is a ERROR message
+2026-07-25 12:47:46,878 - INFO - program started
+2026-07-25 12:47:46,879 - WARNING - this is a WARNING message
+2026-07-25 12:47:46,879 - ERROR - this is a ERROR message
+2026-07-25 13:16:27,981 - INFO - program started
+2026-07-25 13:16:27,983 - WARNING - this is a WARNING message
+2026-07-25 13:16:27,985 - ERROR - this is a ERROR message
+2026-07-25 13:17:16,953 - INFO - loading dataset
+2026-07-25 13:18:11,636 - INFO - dataset loaded successfully
+2026-07-25 13:18:22,906 - INFO - program started
+2026-07-25 13:18:22,908 - WARNING - this is a WARNING message
+2026-07-25 13:18:22,910 - ERROR - this is a ERROR message
+2026-07-25 13:18:22,911 - INFO - loading dataset
+2026-07-25 13:18:22,919 - INFO - dataset loaded successfully
+2026-07-25 13:19:21,355 - INFO - program started
+2026-07-25 13:19:21,356 - WARNING - this is a WARNING message
+2026-07-25 13:19:21,356 - ERROR - this is a ERROR message
+2026-07-25 13:19:21,356 - INFO - loading dataset
+2026-07-25 13:19:21,361 - INFO - dataset loaded successfully
