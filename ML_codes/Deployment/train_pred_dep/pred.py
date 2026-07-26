@@ -11,7 +11,7 @@ def predict(model, input_data: dict):
     return predicted_value
     
 def main():
-    try: 
+    try:
         load_dotenv()
         
         PROJECT_ROOT = Path(os.getenv("PROJECT_ROOT"))
