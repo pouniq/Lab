@@ -84,7 +84,7 @@ df['Married'] = df['Married'].map(mapping)
 X = df.drop(columns = 'Balance')
 y = df["Balance"]
 
-
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=True,random_state=42)
 
 def best_subset_model(X,y):
     result = {}
@@ -118,10 +118,10 @@ def best_subset_model(X,y):
     
     
 
-full_model = sm.OLS(y, X).fit()
+full_model = sm.OLS(y_train, X_train).fit()
 full_model.summary()
         
-best = best_subset_model(X,y)
+best = best_subset_model(X_train,y_train)
 
 
 for k, (subset,model,ssr) in best.items():
@@ -135,6 +135,8 @@ r2 = []
 for k, (subset, model, ssr) in best.items():
     if model is None:
         continue
+    
+    model = model.predict(y_test, X_test)
     aic_score = model.aic
     bic_score = model.bic
     r2_score = model.rsquared_adj
@@ -143,11 +145,67 @@ for k, (subset, model, ssr) in best.items():
     r2.append(r2_score)
     print(f'for {k}: aic is {aic}')
 
-plt.bar(range(0,11),aic)
-plt.bar(range(0,11),bic)
+plt.plot(range(0,11),aic)
+plt.plot(range(0,11),bic)
 plt.plot(range(0,11),r2)
 
 
 # the selection is k = 2
 # income and rating
 
+
+## 6.2
+
+
+
+def make_sub_pred(chosen_cols,X,y):
+    
+    X_const = sm.add_constant(X[chosen_cols])
+    model = sm.OLS(y,X_const).fit()
+    r2 = model.rsquared
+    
+    return r2.tolist()
+
+make_sub_pred(['Age','Rating'],X_train,y_train)
+
+
+best_subset = []
+best_model = None
+best_r2 = -np.inf
+
+predictors = X_train.columns.tolist()
+print(predictors)
+
+
+
+used_predictors = []
+models = {0:{'subset': [], 'r2':None}}
+p = len(predictors)
+
+for k in range(p):
+    r2_result = {}
+    for col in predictors:
+        if col not in used_predictors:
+            columns = used_predictors + [col]
+            r2 = make_sub_pred(columns,X_train,y_train)
+            r2_result[col] = r2
+        
+    best_set = max(r2_result,  key=r2_result.get)
+    best_r2 = r2_result[best_set]
+    
+    used_predictors = used_predictors + [best_set]
+    models[k+1] = {'subset': used_predictors.copy(), 'r2':best_r2 }
+
+for k, det in models.items():
+    print(k, det['subset'], det['r2'])
+    
+    
+
+ks = list(models.keys())
+r2s = [models[k]['r2'] for k in ks]
+
+plt.plot(ks, r2s, marker='o')
+plt.xlabel('Number of predictors (k)')
+plt.ylabel('R²')
+plt.title('Forward Stepwise Selection: R² vs. Model Size')
+plt.show()
